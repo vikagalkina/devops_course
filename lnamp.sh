@@ -7,7 +7,7 @@ apt-get install -y nginx
 # delete default .conf folder nginx
 rm -r cd /etc/nginx/sites-available /etc/nginx/sites-enabled /etc/nginx/nginx.conf
 # paste .conf in nginx
-cp ./conf/nginx/conf.d/wordpress.conf /etc/nginx/conf.d/wordpress.conf
+cp -r ./conf/nginx/conf.d/ /etc/nginx/conf.d/
 cp ./conf/nginx/nginx.conf /etc/nginx/nginx.conf
 
 #install php-fpm
@@ -20,4 +20,4 @@ systemctl restart nginx
 
 # paste site
 rm -r /var/www/html
-cp ./html /var/www/html
+cp -r ./html /var/www/html
