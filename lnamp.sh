@@ -72,13 +72,13 @@ echo To import db from file put your file to conf/mysql dir with filename backup
 read -p 'Do you want to create new db or import from sql? Type "n" for new or "i" for import: ' db_create_option
 if [ $db_create_option == 'n' ]
 then
-  mysql -u root < conf/mysql/base_install.sql
+  mysql -u root -prootroot < conf/mysql/base_install.sql
 elif [ $db_create_option == 'i' ]
 then
   FILE=/etc/resolv.conf
   if [ -f 'conf/mysql/backup.sql' ]
   then
-    mysql -u root < conf/mysql/backup.sql
+    mysql -u root -prootroot < conf/mysql/backup.sql
   else
     echo There no file backup.sql in conf/mysql/ directory!!!
     exit 1
