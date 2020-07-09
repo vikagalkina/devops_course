@@ -10,6 +10,22 @@ if ! [ $(id -u) = 0 ]; then
    exit 1
 fi
 
+# Read user info for db
+read -p 'Enter db name: ' db_name
+
+read -p 'Enter db user: ' db_user
+
+read -sp 'Enter db user password: ' db_user_password
+
+echo Summary:
+echo db name: $db_name
+echo db user: $db_user
+
+export DB_NAME=$db_name
+export DB_USER=$db_user
+export DB_USER_PASSWORD=$db_user_password
+
+
 # Update packages
 apt-get update
 read -p 'Do you want to upgrade packages? Type "y" if yes: ' need_upgrade
@@ -56,15 +72,15 @@ echo To import db from file put your file to conf/mysql dir with filename backup
 read -p 'Do you want to create new db or import from sql? Type "n" for new or "i" for import: ' db_create_option
 if [ $db_create_option == 'n' ]
 then
-  mysql -u root < .conf/mysql/base_install.sql
+  mysql -u root < conf/mysql/base_install.sql
 elif [ $db_create_option == 'i' ]
 then
   FILE=/etc/resolv.conf
-  if [ -f '.conf/mysql/backup.sql' ]
+  if [ -f 'conf/mysql/backup.sql' ]
   then
-    mysql -u root < .conf/mysql/backup.sql
+    mysql -u root < conf/mysql/backup.sql
   else
-    echo There no file backup.sql in .conf/mysql/ directory!!!
+    echo There no file backup.sql in conf/mysql/ directory!!!
     exit 1
   fi
 else
