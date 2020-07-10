@@ -16,14 +16,12 @@ read -p 'Enter db name: ' db_name
 read -p 'Enter db user: ' db_user
 
 read -sp 'Enter db user password: ' db_user_password
+read -sp 'Enter db root password: ' db_root_password
 
 echo Summary:
 echo db name: $db_name
 echo db user: $db_user
 
-export DB_NAME=$db_name
-export DB_USER=$db_user
-export DB_USER_PASSWORD=$db_user_password
 
 
 # Update packages
@@ -70,15 +68,25 @@ apt install mysql-server
 echo You can create new db for wordpress or import db from sql file.
 echo To import db from file put your file to conf/mysql dir with filename backup.sql
 read -p 'Do you want to create new db or import from sql? Type "n" for new or "i" for import: ' db_create_option
+
+conf/mysql/base_install.sh
+
 if [ $db_create_option == 'n' ]
 then
-  mysql -u root -prootroot < conf/mysql/base_install.sql
+  echo Empty db installed!
 elif [ $db_create_option == 'i' ]
 then
-  FILE=/etc/resolv.conf
+  read -p 'Enter remote host address: ' remote_host
+  read -p 'Enter remote db user: ' remote_db_user
+  read -ps 'Enter password for db user: ' remote_db_password
+  read -ps 'Enter db name: ' remote_db_name
+
+  mysqldump -h $remote_host -u $remote_db_user -p$remote_db_password $remote_db_name > conf/mysql/backup.sql
+
   if [ -f 'conf/mysql/backup.sql' ]
   then
-    mysql -u root -prootroot < conf/mysql/backup.sql
+    mysql -u root -p$db_root_password $db_name < conf/mysql/backup.sql
+    rm conf/mysql/backup.sql
   else
     echo There no file backup.sql in conf/mysql/ directory!!!
     exit 1
