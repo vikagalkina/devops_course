@@ -1,5 +1,5 @@
-mysql -u root -p$db_root_password -e "CREATE DATABASE $db_name;"
-mysql -u root -p$db_root_password -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_user_password';"
-mysql -u root -p$db_root_password -e "GRANT ALL PRIVILEGES ON $db_user.* TO '$db_user'@'localhost';"
-mysql -u root -p$db_root_password -e "FLUSH PRIVILEGES;"
+mysql -u root -p$DB_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME;"
+mysql -u root -p$DB_ROOT_PASSWORD -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_USER_PASSWORD';"
+mysql -u root -p$DB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
+mysql -u root -p$DB_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
 

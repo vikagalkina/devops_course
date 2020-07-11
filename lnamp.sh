@@ -22,6 +22,10 @@ echo Summary:
 echo db name: $db_name
 echo db user: $db_user
 
+export DB_NAME=$db_name
+export DB_USER=$db_user
+export DB_USER_PASSWORD=$db_user_password
+export DB_ROOT_PASSWORD=$db_root_password
 
 
 # Update packages
