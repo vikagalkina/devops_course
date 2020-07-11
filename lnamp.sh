@@ -71,7 +71,6 @@ cp ./conf/apache/dir.conf /etc/apache2/mods-available/dir.conf
 apt install mysql-server
 
 echo You can create new db for wordpress or import db from sql file.
-echo To import db from file put your file to conf/mysql dir with filename backup.sql
 read -p 'Do you want to create new db or import from sql? Type "n" for new or "i" for import: ' db_create_option
 
 conf/mysql/base_install.sh
