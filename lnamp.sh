@@ -16,8 +16,9 @@ read -p 'Enter db name: ' db_name
 read -p 'Enter db user: ' db_user
 
 read -sp 'Enter db user password: ' db_user_password
+echo
 read -sp 'Enter db root password: ' db_root_password
-
+echo
 echo Summary:
 echo db name: $db_name
 echo db user: $db_user
@@ -82,8 +83,8 @@ elif [ $db_create_option == 'i' ]
 then
   read -p 'Enter remote host address: ' remote_host
   read -p 'Enter remote db user: ' remote_db_user
-  read -ps 'Enter password for db user: ' remote_db_password
-  read -ps 'Enter db name: ' remote_db_name
+  read -p 'Enter password for db user: ' remote_db_password
+  read -p 'Enter db name: ' remote_db_name
 
   mysqldump -h $remote_host -u $remote_db_user -p$remote_db_password $remote_db_name > conf/mysql/backup.sql
 
